@@ -33,7 +33,7 @@ with DAG('aws_lambda_example_dag',
 
     python_aws_lambda = PythonOperator(
         task_id='python_aws_lambda',
-        python_callable=AWSClient().labmda_invoke_lambda,
+        python_callable=AWSClient().lambda_invoke_lambda,
         op_kwargs={
             "payload": {
                 "key1": "hello, world!",
