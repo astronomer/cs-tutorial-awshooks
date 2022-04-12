@@ -50,16 +50,19 @@ with DAG(
     catchup=False,
     schedule_interval=None,
 ) as dag:
+    # Use boto3 to connect with lambda
     lambda_boto3 = PythonOperator(
         task_id="lambda_boto3",
         python_callable=lambda_boto3,
     )
 
+    # Use LambdaHook to connect with lambda
     lambda_hook = PythonOperator(
         task_id="lambda_hook",
         python_callable=lamba_hook_func,
     )
 
+    # Use AwsLambdaInvokeFunctionOperator to connect with lambda
     lambda_invoke_operator = AwsLambdaInvokeFunctionOperator(
         task_id="lambda_invoke_operator",
         function_name="my_lambda_function",
